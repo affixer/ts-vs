@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import Truncate from 'react-truncate';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addCart } from '../store/cart/actions'
+import { RootState } from '../store';
 
 
 export default function Index() {
@@ -35,6 +36,7 @@ export default function Index() {
 const Product = (props: { id: string, name: string, image?: string, price: number, brand?: string }) => {
     const dummyImage = 'https://dummyimage.com/600x400/5a27a7/fff.png'
     const dispatch = useDispatch()
+    const user = useSelector((state: RootState) => state.user)
 
     const AddToCart = () => {
         dispatch(addCart({
@@ -49,6 +51,9 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
             data: {
                 item: props.id,
                 quantity: 1
+            },
+            headers: {
+                Authorization: `Bearer ${user.token}`
             }
         }).then(resp => {
             toast.info("Item added to cart.")
@@ -57,7 +62,7 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
             toast.error(err.message)
         })
     }
-    
+
     return <div className="card">
         <div className="card-image" style={{
             backgroundImage: `url(${props.image || dummyImage})`
