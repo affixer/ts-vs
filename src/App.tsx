@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
@@ -11,9 +12,9 @@ import Navbar from './components/Navbar';
 
 import 'react-toastify/dist/ReactToastify.css'
 import './styles/common.css'
+
 import { useDispatch } from 'react-redux';
 import { logIn } from './store/user/actions';
-import Axios from 'axios';
 import { addCart } from './store/cart/actions';
 import { Cart as CartType } from './store/cart/types';
 
