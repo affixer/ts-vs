@@ -1,0 +1,70 @@
+.card {
+    margin: 5px;
+    box-sizing: border-box;
+    border: 1px solid #d3d3d3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .card-image {
+        width: 100%;
+        padding-top: 66.66%;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .card-meta {
+        flex: 1;
+        padding: 5px;
+        font-family: $font-secondary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        h3 {
+            font-weight: 600;
+            margin: 0;
+            font-size: 16px;
+        }
+        p.price {
+            margin: 0;
+            font-family: $font-secondary;
+        }
+    }
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 5px;
+
+        .brand {
+            font-family: $font-primary;
+            color: #696969;
+            margin: 0;
+            font-size: 13px;
+            transform: translateY(-4px);
+
+            a {
+                text-decoration: none;
+            }
+
+            span.brand-text {
+                padding: 4px 6px;
+                border-radius: 5px;
+                background: $color-primary;
+                color: white;
+                cursor: pointer;
+            }
+        }
+        button {
+            margin: 0;
+            padding: 5px 12.5px;
+            border: none;
+            cursor: pointer;
+            background: $color-primary;
+            color: white;
+            border-radius: 5px;
+        }
+    }
+}

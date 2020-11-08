@@ -1,8 +1,34 @@
 @import 'variables';
 @import 'navbar';
+@import 'product';
 
 body {
     margin: 0;
     padding: 0;
     font-family: $font-primary;
+}
+.application {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 60px 10px 10px 10px;
+}
+.productContainer {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 2fr);
+    grid-auto-rows: 320px;
+}
+.Toastify__toast--error {
+    background: #B00020 !important;
+}
+.Toastify__toast {
+    border-radius: 7.5px !important;
+    font-family: $font-secondary;
+
+    button {
+        padding-left: 5px !important;
+    }
 }

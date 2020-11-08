@@ -1,6 +1,10 @@
 @import 'variables';
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    z-index: 9;
     height: 60px;
     background: white;
     box-shadow: 4px 4px 8px rgba($color: #888888, $alpha: 0.4), -4px -4px 8px rgba($color: #888888, $alpha: 0.4);
@@ -11,8 +15,8 @@ header {
         padding: 0 10px;
         height: 100%;
         margin: 0 auto;
-        display: grid;
-        grid-template-columns: 100px 300px 5fr 5fr;
+        display: flex;
+        justify-content: space-between;
 
         .logo {
             height: 60px;
@@ -21,6 +25,46 @@ header {
                 height: 100%;
             }
         }
+
+        .search {
+            flex: 1;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+
+            .searchBox {
+                border-radius: 15px;
+                border: 1px solid lightgrey;
+                height: 30px;
+                width: 100%;
+                max-width: 600px;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+
+                label {
+                    height: 100%;
+                    box-sizing: border-box;
+                    padding: 5px;
+                    color: lightgrey;
+                    transform: translateY(-1px);
+                    cursor: text;
+                }
+                
+                input {
+                    flex: 1;
+                    height: 100%;
+                    border: none;
+                    padding: 0 5px;
+                    background: rgba($color: #888888, $alpha: 0);
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+        
         
         ul {
             grid-column: 4/5;
@@ -28,24 +72,52 @@ header {
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            margin-right: 10px;
 
-            li {
-                list-style: none;
-                font-family: $font-primary;
-                margin: 0 20px;
+            
+            a {
+                text-decoration: none;
+                color: $color-primary;
+                font-weight: bold;
+                margin: 0 10px;
 
-                a {
-                    padding: 7.5px 12.5px;
-                    border-radius: 3.5px;
+                li {
+                    list-style: none;
+                    font-family: $font-primary;
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
                     background: rgba($color: #888888, $alpha: 0);
-                    text-decoration: none;
-                    color: $color-primary;
-                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     transition: 0.15s linear;
-                }
+                    position: relative;
 
-                &:hover a {
-                    background: rgba($color: #888888, $alpha: 0.2);
+                    &:hover {
+                        background: rgba($color: $color-primary, $alpha: 0.2);
+                    }
+
+                    i {
+                        transform: translateY(2px);
+                    }
+                    
+                    .badge {
+                        position: absolute;
+                        bottom: 0px;
+                        right: 0px;
+                        // padding: 5px;
+                        background: $color-primary;
+                        height: 15px;
+                        width: 15px;
+                        box-sizing: border-box;
+                        border-radius: 50%;
+                        color: white;
+                        display: grid;
+                        place-items: center;
+                        font-weight: 300;
+                        font-size: 13px;
+                    }
                 }
             }
         }
