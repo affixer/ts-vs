@@ -18,15 +18,18 @@ export function deleteCart(id: string): TYPES.CartActionTypes {
     }
 }
 
-export function updateCart(id: string, quantity: number): TYPES.CartActionTypes {
+export function updateCart(id: string, payload: {
+    name?: string,
+    brand?: string,
+    quantity?: number,
+    price?: number
+}): TYPES.CartActionTypes {
     return {
         type: TYPES.UPDATE_CART,
         meta: {
             id
         },
-        payload: {
-            quantity
-        }
+        payload
     }
 }
 

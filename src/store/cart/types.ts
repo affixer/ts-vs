@@ -8,6 +8,7 @@ export interface Cart {
     name: string
     brand?: string
     quantity: number
+    price: number
 }
 
 export interface CartState {
@@ -30,7 +31,10 @@ interface UpdateCartAction {
         id: string
     },
     payload: {
-        quantity: number
+        name?: string,
+        brand?: string,
+        quantity?: number,
+        price?: number
     }
 }
 interface ClearCartAction {

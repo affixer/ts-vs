@@ -5,8 +5,9 @@ import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addCart } from '../store/cart/actions'
+import { addCart, updateCart } from '../store/cart/actions'
 import { RootState } from '../store';
+import { Cart } from '../store/cart/types';
 
 
 export default function Index() {
@@ -37,14 +38,23 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
     const dummyImage = 'https://dummyimage.com/600x400/5a27a7/fff.png'
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user)
+    const cart = useSelector((state: RootState) => state.cart)
 
     const AddToCart = () => {
-        dispatch(addCart({
-            id: props.id,
-            name: props.name,
-            brand: props.brand,
-            quantity: 1
-        }))
+        const thisCart: Cart[] = cart.carts.filter((cartDetail: Cart) => cartDetail.id === props.id)
+        if (!thisCart.length) {
+            dispatch(addCart({
+                id: props.id,
+                name: props.name,
+                brand: props.brand,
+                quantity: 1,
+                price: props.price
+            }))
+        } else {
+            dispatch(updateCart(props.id, {
+                quantity: 1 + thisCart[0].quantity
+            }))
+        }
         Axios({
             method: "POST",
             url: "/api/cart/addCart",

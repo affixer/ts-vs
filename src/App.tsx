@@ -16,7 +16,11 @@ import './styles/common.css'
 import { useDispatch } from 'react-redux';
 import { logIn } from './store/user/actions';
 import { addCart } from './store/cart/actions';
-import { Cart as CartType } from './store/cart/types';
+
+interface CartFromServer {
+    item: string
+    quantity: number
+}
 
 export default function App() {
     const dispatch = useDispatch()
@@ -29,10 +33,21 @@ export default function App() {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => {
-                const { data } = resp
-                console.log(data)
-                data.cartItems.forEach((cart: CartType ) => {
-                    dispatch(addCart(cart))
+                const { cartItems } = resp.data
+                cartItems.forEach((cart: CartFromServer) => {
+                    Axios({
+                        method: "GET",
+                        url: `/api/products/getProduct/${cart.item}`
+                    }).then(res => {
+                        const { product } = res.data
+                        return dispatch(addCart({
+                            id: cart.item,
+                            name: product.name,
+                            brand: product.brand,
+                            quantity: cart.quantity,
+                            price: product.price
+                        }));
+                    }).catch(err => console.log(err.message))
                 });
             }).catch(err => {
                 toast("There was a problem fetching data from server.")

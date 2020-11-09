@@ -18,7 +18,7 @@ export function cartReducer(state = initialState, action: TYPES.CartActionTypes)
             return {
                 carts: state.carts.map(cart =>
                     cart.id !== action.meta.id ? cart
-                        : { ...cart, quantity: action.payload.quantity })
+                        : { ...cart, ...action.payload })
             }
         case TYPES.CLEAR_CART:
             return {
