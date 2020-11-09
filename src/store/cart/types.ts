@@ -1,6 +1,7 @@
-export const ADD_CART = 'SEND_MESSAGE'
-export const REMOVE_CART = 'DELETE_MESSAGE'
+export const ADD_CART = 'ADD_CART'
+export const REMOVE_CART = 'REMOVE_CART'
 export const UPDATE_CART = 'UPDATE_CART'
+export const CLEAR_CART = 'CLEAR_CART'
 
 export interface Cart {
     id: string
@@ -32,5 +33,8 @@ interface UpdateCartAction {
         quantity: number
     }
 }
+interface ClearCartAction {
+    type: typeof CLEAR_CART
+}
 
-export type CartActionTypes = AddCartAction | RemoveCartAction | UpdateCartAction
+export type CartActionTypes = AddCartAction | RemoveCartAction | UpdateCartAction | ClearCartAction

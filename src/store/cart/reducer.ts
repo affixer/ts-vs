@@ -20,6 +20,10 @@ export function cartReducer(state = initialState, action: TYPES.CartActionTypes)
                     cart.id !== action.meta.id ? cart
                         : { ...cart, quantity: action.payload.quantity })
             }
+        case TYPES.CLEAR_CART:
+            return {
+                carts: []
+            }
         default:
             return state
     }

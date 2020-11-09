@@ -29,3 +29,9 @@ export function updateCart(id: string, quantity: number): TYPES.CartActionTypes 
         }
     }
 }
+
+export function clearCart(): TYPES.CartActionTypes {
+    return {
+        type: TYPES.CLEAR_CART
+    }
+}
