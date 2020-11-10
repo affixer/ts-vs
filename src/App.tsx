@@ -50,7 +50,7 @@ export default function App() {
                     }).catch(err => console.log(err.message))
                 });
             }).catch(err => {
-                toast("There was a problem fetching data from server.")
+                toast.error("There was a problem fetching data from server.")
             })
         }
         const token = localStorage.getItem("token")

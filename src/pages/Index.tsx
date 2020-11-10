@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCart, updateCart } from '../store/cart/actions'
 import { RootState } from '../store';
 import { Cart } from '../store/cart/types';
+import { parsePrice } from '../utils';
 
 
 export default function Index() {
@@ -83,16 +84,6 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
         }}>
         </div>
         <div className="card-meta">
-            <h3>
-                <Truncate lines={2} ellipsis="...">
-                    {props.name}
-                </Truncate>
-            </h3>
-            <p className="price">
-                Rs. {props.price}/-
-            </p>
-        </div>
-        <div className="card-footer">
             <p className="brand">
                 <Link to={`/brand/${props.brand?.toString().toLowerCase() || 'no-brand'}`}>
                     <span className="brand-text">
@@ -101,6 +92,16 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
                         </Truncate>
                     </span>
                 </Link>
+            </p>
+            <h3>
+                <Truncate lines={2} ellipsis="...">
+                    {props.name}
+                </Truncate>
+            </h3>
+        </div>
+        <div className="card-footer">
+            <p className="price">
+                <span className="currency">Rs.</span>{parsePrice(props.price)}
             </p>
             <button className={!token ? "notLoggedInButton" : ""} onClick={token ? AddToCart : alertNotLoggedIn}>
                 <i className="material-icons">add_shopping_cart</i>

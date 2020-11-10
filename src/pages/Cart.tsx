@@ -10,6 +10,8 @@ import { User } from '../store/user/types'
 
 import '../styles/cart.css'
 
+import { parsePrice } from '../utils'
+
 export default function Cart() {
     const { carts }: CartState = useSelector((state: RootState) => state.cart)
     const { token } : User = useSelector((state: RootState) => state.user)
@@ -21,17 +23,7 @@ export default function Cart() {
         let totalCost = 0
         for (const cart of carts)
             totalCost += cart.quantity * cart.price
-        let reverseCost = totalCost.toString().split('').reverse().join('')
-        let characterCount = reverseCost.length
-        let costCountStr = ''
-        let i = 0;
-        while (i+3 < characterCount-1) {
-            costCountStr += reverseCost.substr(i, 3) + ','
-            characterCount++
-            i += 3
-        }
-        costCountStr += reverseCost.substr(i)
-        return costCountStr.toString().split('').reverse().join('')
+        return parsePrice(totalCost)
     }
     const checkOutNow = () => {
         if (!carts.length) return
