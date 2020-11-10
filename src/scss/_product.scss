@@ -66,6 +66,11 @@
             background: $color-primary;
             color: white;
             border-radius: 5px;
+
+            &.notLoggedInButton {
+                background: grey;
+                cursor: not-allowed;
+            }
         }
     }
 }

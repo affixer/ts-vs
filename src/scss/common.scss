@@ -62,3 +62,7 @@ i.loading {
     transform: rotate(360deg);
   }
 }
+
+button:focus {
+  outline: none;
+}

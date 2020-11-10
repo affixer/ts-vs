@@ -37,11 +37,11 @@ export default function Index() {
 const Product = (props: { id: string, name: string, image?: string, price: number, brand?: string }) => {
     const dummyImage = 'https://dummyimage.com/600x400/5a27a7/fff.png'
     const dispatch = useDispatch()
-    const user = useSelector((state: RootState) => state.user)
-    const cart = useSelector((state: RootState) => state.cart)
+    const { token } = useSelector((state: RootState) => state.user)
+    const { carts } = useSelector((state: RootState) => state.cart)
 
     const AddToCart = () => {
-        const thisCart: Cart[] = cart.carts.filter((cartDetail: Cart) => cartDetail.id === props.id)
+        const thisCart: Cart[] = carts.filter((cartDetail: Cart) => cartDetail.id === props.id)
         if (!thisCart.length) {
             dispatch(addCart({
                 id: props.id,
@@ -63,7 +63,7 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
                 quantity: 1
             },
             headers: {
-                Authorization: `Bearer ${user.token}`
+                Authorization: `Bearer ${token}`
             }
         }).then(resp => {
             toast.info("Item added to cart.")
@@ -71,6 +71,10 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
             console.error(err.message)
             toast.error(err.message)
         })
+    }
+
+    const alertNotLoggedIn = () => {
+        toast.error("You're not logged in")
     }
 
     return <div className="card">
@@ -98,7 +102,7 @@ const Product = (props: { id: string, name: string, image?: string, price: numbe
                     </span>
                 </Link>
             </p>
-            <button onClick={AddToCart}>
+            <button className={!token ? "notLoggedInButton" : ""} onClick={token ? AddToCart : alertNotLoggedIn}>
                 <i className="material-icons">add_shopping_cart</i>
             </button>
         </div>
