@@ -32,6 +32,10 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "yarn build"
   },
+  "engines": {
+    "yarn": "1.x",
+    "node": "12.x"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
