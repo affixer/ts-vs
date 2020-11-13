@@ -1,1 +1,1 @@
-web: serve -s build
+web: yarn heroku-launch
