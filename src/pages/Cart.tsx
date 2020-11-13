@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { RootState } from '../store'
-import { clearCart } from '../store/cart/actions'
+import { clearCart, deleteCart } from '../store/cart/actions'
 
 import { Cart as CartType, CartState } from '../store/cart/types'
 import { User } from '../store/user/types'
@@ -81,6 +81,24 @@ export default function Cart() {
 
 const CartItem = (props: { cart: CartType }) => {
     const { cart } = props
+    const dispatch = useDispatch()
+    const { token } = useSelector((state: RootState) => state.user)
+
+    const deleteFromCart = () => {
+        Axios({
+            method:"DELETE",
+            url: `/api/cart/removeItem/${cart.id}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(resp => {
+            dispatch(deleteCart(cart.id))
+            toast.info("Cart deleted successfully.")
+        }).catch(err => {
+            toast.error("Could not complete the action.")
+        })
+    }
+    
     return <div className="cartItem">
         <div className="meta">
             <h3>{cart.name}</h3>
@@ -88,13 +106,18 @@ const CartItem = (props: { cart: CartType }) => {
                 {cart.brand}
             </p>
             <p className="price">
-                Rs. {cart.price}/- <span>per unit.</span>
+                <span className="currency">Rs.</span>{parsePrice(cart.price)} <span className="costDetails">per unit.</span>
             </p>
         </div>
         <div className="cart-data">
             <p>
                 Quantity: <span className="quantity">{cart.quantity}</span>
             </p>
+        </div>
+        <div className="deleteCart">
+            <button onClick={deleteFromCart} className="delete">
+                <i className="material-icons">delete</i>
+            </button>
         </div>
     </div>
 }
