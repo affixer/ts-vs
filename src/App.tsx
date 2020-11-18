@@ -50,10 +50,6 @@ export default function App() {
 
   React.useEffect(() => {
     const getCartDetails = (token: string) => {
-
-      console.log(token);
-      
-      
       Axios({
         method: "GET",
         url: "/api/cart/getCartItems",
