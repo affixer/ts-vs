@@ -25,4 +25,4 @@ jobs:
     - run: npm i
     - run: npm run build --if-present
     - run: npm test --if-present
-    - run: serve -s build
+    - run: pm2 restart app
