@@ -17,6 +17,7 @@ import "./styles/common.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "./store/user/actions";
 import { addCart } from "./store/cart/actions";
+import Profile from "./pages/Profile";
 
 // import { RootState } from "./store";
 // import io from "socket.io-client";
@@ -103,6 +104,7 @@ export default function App() {
             <Route path="/register">
               <Login isRegister />
             </Route>
+            <Route path="/profile" component={Profile} />
           </Switch>
         </div>
       </Router>

@@ -1,0 +1,63 @@
+@import 'variables';
+
+.profile-page {
+    width: 100%;
+    min-height: calc(100vh - 100px);
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+}
+.profile-data {
+    flex: 0.2;
+    max-width: 400px;
+
+    .picture {
+        width: 250px;
+        height: 250px;
+        margin: 30px auto;
+        border-radius: 10px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: fit-content;
+        }
+    }
+    section {
+        padding: 20px 10px;
+        width: 100%;
+        font-family: $font-secondary;
+        box-sizing: border-box;
+        
+        .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .text {
+                margin: 0 10px 0 0;
+                color: #919191;
+                font-family: $font-primary;
+            }
+
+            .line {
+                flex: 1;
+                height: 1.5px;
+                background: #e3e3e3;
+            }
+        }
+        p {
+            margin: 0;
+
+            i {
+                font-size: 16px;
+                color: #919191;
+                transform: translateY(2px);
+            }
+            span {
+                margin-left: 5px;
+            }
+        }
+    }
+}

@@ -3,3 +3,5 @@ $font-secondary: 'Source Sans Pro', sans-serif;
 
 
 $color-primary: #5a27a7;
+
+$shadow: 4px 4px 9px -3px rgba($color: $color-primary, $alpha: 0.4), -4px -4px 9px -3px rgba($color: $color-primary, $alpha: 0.4);
